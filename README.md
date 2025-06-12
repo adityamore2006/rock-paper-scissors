@@ -1,1 +1,2 @@
 # rock-paper-scissors
+as a starter project I developed a fully functioning rock paper scissor game that runs in the console. NO styling was done since this was a practice project to test my JS and gain comfortability with the language. 
