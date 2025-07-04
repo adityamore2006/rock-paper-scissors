@@ -1,6 +1,7 @@
 
 //main function that runs the game in 5 rounds
 
+
 let humanScore = 0;
 let computerScore = 0;
 
@@ -24,52 +25,18 @@ function playGame(){
     }
 }
 
+// Humans choice of Rock Paper or Scissors
+function getHumanChoice(){
+    let choice = prompt("Rock Paper Scissors?").toLowerCase();
 
-// Intiates a round of Rock Paper Scissors
-
-function playRound(humanChoice, computerChoice,  roundNumber) {
-    console.log(`---Round ${roundNumber}/5---`);
-    if(humanChoice === 'rock') { //human picked rock
-        if (computerChoice === 'rock'){ // rock vs rock
-            console.log(`Tie!`)
-        }
-        else if (computerChoice === 'paper') { //rock vs paper
-            console.log(`You Lose! Paper beats Rock!`)
-            computerScore += 1;
-        }
-        else if (computerChoice === 'scissors') { //rock vs scissors
-            console.log(`You Win! Rock beats Scissors`)
-            humanScore += 1;
-        }
-    }
-    else if (humanChoice === 'paper') { //human picked paper
-        if (computerChoice === 'rock'){ // paper vs rock
-            console.log(`You Win! Paper beats Rock`)
-            humanScore += 1;            
-        }
-        else if (computerChoice === 'paper') { //paper vs paper
-            console.log(`Tie!`)
-        }
-        else if (computerChoice === 'scissors') { //paper vs scissors
-            console.log(`You Lose! Scissors beats Paper`)
-            computerScore += 1;
-        }
-    }
-    else if (humanChoice === 'scissors') { //human picked scissors
-        if (computerChoice === 'rock'){ // scissors vs rock
-            console.log(`You Lose! Rock beats Scissors`)
-            computerScore += 1;
-        
-        }
-        else if (computerChoice === 'paper') { //scissors vs paper
-            console.log(`You Win! Scissors beats Paper`)
-            humanScore += 1;            
-        }
-        else if (computerChoice === 'scissors') { //scissors vs scissors
-            console.log(`Tie!`)
-        }
-    }
+    if (choice === "rock")
+        return("rock")
+    else if (choice === "paper")
+        return("paper")
+    else if (choice === "scissors")
+        return("scissors")
 }
+
 
 // computers choice of Rock Paper or Scissors
 function getComputerChoice() {
@@ -89,19 +56,49 @@ function getComputerChoice() {
     }
 }
 
-// Humans choice of Rock Paper or Scissors
-function getHumanChoice(){
-    let choice = prompt("Rock Paper Scissors?").toLowerCase();
+// Intiates a round of Rock Paper Scissors
 
-    if (choice === "rock")
-        return("rock")
-    else if (choice === "paper")
-        return("paper")
-    else if (choice === "scissors")
-        return("scissors")
+function playRound(humanChoice, computerChoice,  roundNumber) {
+    console.log(`---Round ${roundNumber}/5---`);
+    const matchup =  `${humanChoice}-${computerChoice}`
+    switch (matchup) {
+        case 'rock-rock':
+        case 'paper-paper':
+        case 'scissors-scissors':
+            console.log('Tie!');
+            break;
+        case 'rock-paper':
+            console.log('You Lose! Paper beats Rock!');
+            computerScore += 1;
+            break;
+        case 'rock-scissors':
+            console.log('You Win! Rock beats Scissors');
+            humanScore += 1;
+            break;
+        case 'paper-rock':
+            console.log('You Win! Paper beats Rock');
+            humanScore += 1;
+            break;
+        case 'paper-scissors':
+            console.log('You Lose! Scissors beats Paper');
+            computerScore += 1;
+            break;
+        case 'scissors-rock':
+            console.log('You Lose! Rock beats Scissors');
+            computerScore += 1;
+            break;
+        case 'scissors-paper':
+            console.log('You Win! Scissors beats Paper');
+            humanScore += 1;
+            break;
+        default:
+            console.log('Invalid input!');
+    }
 }
 
 playGame();
+
+
 
 
 
