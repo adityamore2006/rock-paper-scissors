@@ -1,29 +1,9 @@
 
-//main function that runs the game in 5 rounds
-
 
 let humanScore = 0;
 let computerScore = 0;
 
-function playGame(){
 
-    for(let i = 0 ; i < 5; i++){
-        const humanSelection = getHumanChoice();
-        const computerSelection = getComputerChoice();
-        playRound(humanSelection, computerSelection, i + 1);
-        console.log("Your Score     = " + humanScore)
-        console.log("Computer Score = " + computerScore)
-    }
-    if (humanScore > computerScore) {
-        console.log(`You Won the Game`)
-    }
-    else if (humanScore < computerScore){
-        console.log(`You Lost the Game`)
-    }
-    else{
-        console.log('You Tied the Game')
-    }
-}
 
 // Humans choice of Rock Paper or Scissors
 function getHumanChoice(){
@@ -57,46 +37,87 @@ function getComputerChoice() {
 }
 
 // Intiates a round of Rock Paper Scissors
+function updateScore() {
+    const scoreDiv = document.getElementById('score')
+    scoreDiv.textContent = `Your Score: ${humanScore} | Computer Score: ${computerScore}`
+}
+
+function disableButtons() {
+    document.getElementById('rock').disabled = true;
+    document.getElementById('paper').disabled = true;
+    document.getElementById('scissors').disabled = true;
+}
+
+function checkWinner() {
+    if (humanScore == 5) {
+        resultDiv.textContent = `You Won the Game`
+        disableButtons()
+    }
+    else if (computerScore == 5){
+        resultDiv.textContent = `You Lost the Game`
+        disableButtons()
+
+    }
+}
+
+const resultDiv = document.getElementById("display") // used by both the checkWinner function and playRound function
 
 function playRound(humanChoice, computerChoice,  roundNumber) {
-    console.log(`---Round ${roundNumber}/5---`);
     const matchup =  `${humanChoice}-${computerChoice}`
     switch (matchup) {
         case 'rock-rock':
         case 'paper-paper':
         case 'scissors-scissors':
-            console.log('Tie!');
+            resultDiv.textContent = 'Tie!';
+            updateScore()
             break;
         case 'rock-paper':
-            console.log('You Lose! Paper beats Rock!');
+            resultDiv.textContent ='You Lose! Paper beats Rock!';
             computerScore += 1;
+            updateScore()
             break;
         case 'rock-scissors':
-            console.log('You Win! Rock beats Scissors');
+            resultDiv.textContent ='You Win! Rock beats Scissors';
             humanScore += 1;
+            updateScore()
             break;
         case 'paper-rock':
-            console.log('You Win! Paper beats Rock');
+            resultDiv.textContent ='You Win! Paper beats Rock';
             humanScore += 1;
+            updateScore()
             break;
         case 'paper-scissors':
-            console.log('You Lose! Scissors beats Paper');
+            resultDiv.textContent ='You Lose! Scissors beats Paper';
             computerScore += 1;
+            updateScore()
             break;
         case 'scissors-rock':
-            console.log('You Lose! Rock beats Scissors');
+            resultDiv.textContent ='You Lose! Rock beats Scissors';
             computerScore += 1;
+            updateScore()
             break;
         case 'scissors-paper':
-            console.log('You Win! Scissors beats Paper');
+            resultDiv.textContent ='You Win! Scissors beats Paper';
             humanScore += 1;
+            updateScore()
             break;
         default:
-            console.log('Invalid input!');
+            resultDiv.textContent ='Invalid input!';
     }
+    checkWinner()
 }
 
-playGame();
+document.getElementById('rock').addEventListener('click', function() {playRound('rock',  getComputerChoice(), 1)})
+
+document.getElementById('paper').addEventListener('click', function() {playRound('paper',  getComputerChoice(), 1)})
+
+document.getElementById('scissors').addEventListener('click', function() {playRound('scissors',  getComputerChoice(), 1)})
+
+
+
+//main function that runs the game in 5 rounds
+
+//playGame();
 
 
 
